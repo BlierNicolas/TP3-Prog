@@ -10,7 +10,7 @@ public class Navire {
 		this.positions = _positions;
 	}
 	
-	public boolean estVivant(){
+	public boolean estCoule(){
 		Position[] position = getPosition();
 		int compteur = 0;
 		for(int i = 0; i< position.length; i++){
@@ -39,6 +39,6 @@ public class Navire {
 		this.positions = _positions;
 	}
 	public String toString() {
-		return this.nom + " est long de " + getPosition().length + " cases et le bateau est vivant: " + estVivant();
+		return this.nom + " est long de " + getPosition().length + " cases et le bateau est vivant: " + estCoule();
 	}
 }
