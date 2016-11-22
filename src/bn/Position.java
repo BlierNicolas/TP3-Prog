@@ -5,6 +5,7 @@ public class Position
 	private int colonne;
 	private int rangee;
 	private boolean touche;
+	private boolean estOccuper;
 	
 	final int MAX_COLONNE_RANGEE = 9;//Limite maximum pour les rangee et les colonnes
 	
@@ -42,6 +43,12 @@ public class Position
 	}
 	public void setTouche(boolean _value){
 		this.touche = _value;
+	}
+	public boolean getEstOccuper(){
+		return this.estOccuper;
+	}
+	public void setEstOccuper(boolean _value){
+		this.estOccuper = _value;
 	}
 	/**
 	 * Valide si le parametre est une colonne ou rangee valide

@@ -3,11 +3,14 @@ package bn;
 public class Navire {
 	private String nom;
 	private Position[] positions;
+	private int longueur;
+
 
 	
-	public Navire(String _nom, Position[] _positions) {
+	public Navire(String _nom,int _longueur, Position[] _positions) {
 		this.nom = _nom;
 		this.positions = _positions;
+		this.longueur = _longueur;
 	}
 	
 	public boolean estCoule(){
@@ -37,6 +40,15 @@ public class Navire {
 	
 	public void setPosition(Position[] _positions){
 		this.positions = _positions;
+	}
+	
+	public int getLongueur(){
+		return this.longueur;
+	}
+	public void setLongueur(int _longueur){
+		this.longueur = _longueur;
+		}
+		
 	}
 	public String toString() {
 		return this.nom + " est long de " + getPosition().length + " cases et le bateau est vivant: " + estCoule();
