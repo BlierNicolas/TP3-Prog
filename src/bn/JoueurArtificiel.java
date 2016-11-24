@@ -1,6 +1,10 @@
 package bn;
 
 public class JoueurArtificiel extends AJoueur {
+	
+	JoueurArtificiel(){
+		super(); 
+	}
 
 	@Override
 	public void tire(IJoueur cible) {

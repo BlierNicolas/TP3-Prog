@@ -7,9 +7,9 @@ public class Navire {
 
 
 	
-	public Navire(String _nom,int _longueur, Position[] _positions) {
+	public Navire(String _nom,int _longueur) {
 		this.nom = _nom;
-		this.positions = _positions;
+		this.positions = null;
 		this.longueur = _longueur;
 	}
 	
@@ -49,7 +49,6 @@ public class Navire {
 		this.longueur = _longueur;
 		}
 		
-	}
 	public String toString() {
 		return this.nom + " est long de " + getPosition().length + " cases et le bateau est vivant: " + estCoule();
 	}

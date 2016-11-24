@@ -7,7 +7,7 @@ public class Position
 	private boolean touche;
 	private boolean estOccuper;
 	
-	final int MAX_COLONNE_RANGEE = 9;//Limite maximum pour les rangee et les colonnes
+	public final int MAX_COLONNE_RANGEE = 9;//Limite maximum pour les rangee et les colonnes
 	
 	public Position(int _colonne, int _rangee)
 	{
@@ -56,7 +56,7 @@ public class Position
 	 * @return Vrai si la valeur est inferieur au MAX_COLONNE_RANGEE et superieur a 0
 	 */
 	boolean validation(int _value){
-		if(_value <= MAX_COLONNE_RANGEE && _value > 0){
+		if(_value <= MAX_COLONNE_RANGEE && _value >= 0){
 			return true; 
 		}
 		return false;
