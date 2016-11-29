@@ -23,9 +23,9 @@ public class Navire {
 		}
 		
 		if(compteur == position.length){
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	public String getNom() {
 		return this.nom;

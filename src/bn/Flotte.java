@@ -3,7 +3,7 @@ package bn;
 import listeDouble.ListeDouble;
 
 public class Flotte {
-	private ListeDouble navires;
+	private Navire[] navires;
 	private Position[][] grille;
 	
 	
@@ -11,6 +11,7 @@ public class Flotte {
 	public Flotte() {
 		//this.navires = 0; 
 		initGrille();
+		navires = new Navire[4];
 		
 	}
 	
@@ -22,6 +23,8 @@ public class Flotte {
 			}
 		}
 	}
+	
+	
 	
 	public Position[][] getGrille(){
 		return this.grille;

@@ -3,15 +3,15 @@ package bn;
 import java.util.Random;
 
 public abstract class AJoueur implements IJoueur {
-	Flotte flotte;
+	//Flotte flotte;
 	final int MAX_RANGEE_COLONNE = 9;
 	AJoueur()
 	{
-		flotte = new Flotte();
+		//this.flotte = new Flotte();
 	}
 	//placerRandom
 	public void placeNavire(Navire navire){
-		Position[] positionsValide = getRandPositions(navire.getLongueur());
+		Position[] positionsValide = getRandPositionsNavire(navire.getLongueur());
 
 		navire.setPosition(positionsValide);//Enregistre les positions du navire
 		flotte.setPositionsOccuper(positionsValide);//Enregistre les positions de navire dans la grille
@@ -20,9 +20,20 @@ public abstract class AJoueur implements IJoueur {
 	}
 
 
+	 public Position getRandPositionGrille(){
+		do{
+			int randX  = new Random().nextInt(MAX_RANGEE_COLONNE);
+			int randY = new Random().nextInt(MAX_RANGEE_COLONNE);
+			
+			//Trouve une position aleatoire non touchee
+				if(!this.flotte.getGrille()[randX][randY].getTouchee()){
+					return new Position(randX,randY);
+				}
+		}while(true);
+		
+	}
 
-
-	private Position[] getRandPositions(int _longueur){
+	private Position[] getRandPositionsNavire(int _longueur){
 		while(true){
 
 			//Genere Position(X,Y) Aleatoire
@@ -32,7 +43,7 @@ public abstract class AJoueur implements IJoueur {
 			int randOrientation = new Random().nextInt(3);//4 Orientations possible(Haut,Bas,Gauche,Droite)
 			
 			//Tableau contenant les positions possible du navire
-			Position[] positionRetour = new Position[_longueur];
+			Position[] positionRetour = new Position[_longueur];//Mauvais!! On doit mettre une liste dynamique ici 
 
 
 			if(!flotte.getGrille()[randX][randY].getEstOccuper())

@@ -35,6 +35,6 @@ public class Main {
 	}
 	
 	public static void demarre() {
-		new Frame("Bataille navalle");
+		//new Frame("Bataille navalle");
 	}
 }
