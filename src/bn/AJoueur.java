@@ -39,8 +39,8 @@ public abstract class AJoueur implements IJoueur {
 			//Genere Position(X,Y) Aleatoire
 			int randX  = new Random().nextInt(MAX_RANGEE_COLONNE);
 			int randY = new Random().nextInt(MAX_RANGEE_COLONNE);
-			//Genere 4 Orientations possible(Haut,Bas,Gauche,Droite)
-			int randOrientation = new Random().nextInt(3);//4 Orientations possible(Haut,Bas,Gauche,Droite)
+			//Genere 2 Orientations possible(Haut,Droite)
+			int randOrientation = new Random().nextInt(2);
 			
 			//Tableau contenant les positions possible du navire
 			Position[] positionRetour = new Position[_longueur];//Mauvais!! On doit mettre une liste dynamique ici 
@@ -63,16 +63,29 @@ public abstract class AJoueur implements IJoueur {
 						}
 					}
 					//Si toute les cases tester peuvents acceuillir le navire
-					if(positionRetour.length == _longueur){
+					if(positionRetour.length == _longueur){//Mauvais as fuck
 						//Met tout les cases du tableau a occupee 
 						return setEstOccuper(positionRetour);
 					}
 					break;
-				case 1: //Orientation gauche
+				case 1: //Orientation Droite
+					if((randX + _longueur) < MAX_RANGEE_COLONNE){
+						//Parcours tout les cases adjacentes et ajoute la position au tableau si elle est libre
+						for(int i = 0; i<_longueur; i++){
+							if(!flotte.getGrille()[randX + i][randY].getEstOccuper()){
+								
+								positionRetour[i] = flotte.getGrille()[randX + i][randY];
+							}
+						}
+					}
+					//Si toute les cases tester peuvents acceuillir le navire
+					if(positionRetour.length == _longueur){//Mauvais as fuck
+						//Met tout les cases du tableau a occupee 
+						return setEstOccuper(positionRetour);
+					}
+					
 					break;
-				case 2: //Orientation bas
-					break;
-				case 3: //Orientation droite 
+
 
 				}
 

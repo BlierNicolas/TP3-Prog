@@ -61,5 +61,18 @@ public class Position
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString(){
+		
+		if(getEstOccuper()){
+			return "+";
+		}else if(getTouchee()){
+			return "X";
+		}else{
+			return "O";
+		}
+	}
+	
 
 }

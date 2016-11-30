@@ -50,6 +50,10 @@ public class Navire {
 		}
 		
 	public String toString() {
-		return this.nom + " est long de " + getPosition().length + " cases et le bateau est vivant: " + estCoule();
+		String strRetour = "Navire: Position: ";
+		for(int i=0; i<getPosition().length; i++){
+			strRetour += "{" + getPosition()[i].getColonne() + ";" + getPosition()[i].getRangee() + "} ";
+		}
+		return strRetour + this.nom + " est long de " + getPosition().length + " cases et le bateau est Coulee: " + estCoule();
 	}
 }

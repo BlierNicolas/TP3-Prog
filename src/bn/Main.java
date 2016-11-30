@@ -6,8 +6,6 @@ import javax.swing.JButton;
 
 public class Main {
 	
-	static Flotte flotteJoueur;
-	static Flotte flotteEnnemie;
 	public static void main(String[] args) {
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -29,8 +27,11 @@ public class Main {
 			});*/
 		JoueurArtificiel AI = new JoueurArtificiel();
 		Navire navire = new Navire("Prout",3);
-		
+		Navire navire2 = new Navire("BIG D", 5);
 		AI.placeNavire(navire);
+		AI.placeNavire(navire2);
+		System.out.println(navire.toString());
+		System.out.println(navire2.toString());
 		
 	}
 	
