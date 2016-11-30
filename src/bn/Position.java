@@ -61,5 +61,19 @@ public class Position
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString(){
+		String strRetour = "";
+		if(getEstOccuper()){
+			strRetour = "+";
+		} 
+		if(getTouchee()){
+			strRetour = "X";
+		}
+		
+		return strRetour;
+	}
+	
 
 }
