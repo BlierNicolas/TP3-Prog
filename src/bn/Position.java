@@ -64,14 +64,15 @@ public class Position
 	
 	@Override
 	public String toString(){
-		
+		String strRetour = "";
 		if(getEstOccuper()){
-			return "+";
-		}else if(getTouchee()){
-			return "X";
-		}else{
-			return "O";
+			strRetour = "+";
+		} 
+		if(getTouchee()){
+			strRetour = "X";
 		}
+		
+		return strRetour;
 	}
 	
 
