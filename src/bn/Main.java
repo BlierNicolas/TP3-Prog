@@ -25,9 +25,12 @@ public class Main {
 			calc.setVisible(true);
 			}
 			});*/
+		
+		
+		/*
 		JoueurArtificiel AI = new JoueurArtificiel();
-		Navire navire = new Navire("Prout",3);
-		//Navire navire2 = new Navire("BIG D", 5);
+		Navire navire = new Navire("Navire 3",3);
+		//Navire navire2 = new Navire("Navire 5", 5);
 		AI.placeNavire(navire);
 		//AI.placeNavire(navire2);
 		System.out.println(navire.toString());
@@ -41,11 +44,11 @@ public class Main {
 		
 		System.out.println(navire.toString());
 		
-		
+		*/
 		
 	}
 	
 	public static void demarre() {
-		//new Frame("Bataille navalle");
+		Frame test = new Frame("Bataille navalle");
 	}
 }

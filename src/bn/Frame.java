@@ -18,7 +18,7 @@ public class Frame extends JFrame {
 		
 		this.setBounds(200, 200, 500, 500);
 		
-		//Cération des composantes
+		//Cï¿½ration des composantes
 		JButton btnPlacerPA = new JButton("Placer P-A");
 		JButton btnPlacerCroisseur = new JButton("Placer Croisseur");
 		JButton btnPlacerContreT = new JButton("Placer Contre-T");
@@ -36,43 +36,51 @@ public class Frame extends JFrame {
 		JTable grilleAI = new JTable(null, entetes);
 		JTable grilleJ = new JTable(null, entetes);
 		
-		JFrame buttonFrame = new JFrame();
-		JFrame tirsFrame = new JFrame();
-		JFrame grilleFrame = new JFrame();
-		JFrame logFrame = new JFrame();
+		JPanel buttonPanel = new JPanel();
+		JPanel tirsPanel = new JPanel();
+		JPanel grillePanel = new JPanel();
+		JPanel logPanel = new JPanel();
 		GridLayout gridL = new GridLayout(0,1);
 		
+		
+		buttonPanel.setLayout(new GridLayout(5,1));
+		
+		
 		//Disposition des composantes
-		this.getContentPane().add(buttonFrame, BorderLayout.LINE_START);
-		this.getContentPane().add(grilleFrame, gridL);
-		this.getContentPane().add(tirsFrame, gridL);
+		this.getContentPane().add(buttonPanel, BorderLayout.LINE_START);
+		this.getContentPane().add(grillePanel, BorderLayout.NORTH);
+		this.getContentPane().add(tirsPanel, BorderLayout.SOUTH);
 		this.getContentPane().add(tbLog, BorderLayout.PAGE_END);
 		
 		
-		buttonFrame.getContentPane().add(btnPlacerPA, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnPlacerCroisseur, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnPlacerContreT, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnPlacerSousMarin, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnPlacerTorpilleur, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnAnnuler, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnAide, BoxLayout.Y_AXIS);
-		buttonFrame.getContentPane().add(btnRecommencer, BoxLayout.Y_AXIS);
+		
+		buttonPanel.add(btnPlacerPA);
+		//buttonPanel.add(btnPlacerPA, BoxLayout.Y_AXIS);
+		//buttonPanel.add(btnPlacerCroisseur, BoxLayout.Y_AXIS);
+		buttonPanel.add(btnPlacerCroisseur);
+		/*
+		buttonPanel.add(btnPlacerContreT, BoxLayout.Y_AXIS);
+		buttonPanel.add(btnPlacerSousMarin, BoxLayout.Y_AXIS);
+		buttonPanel.add(btnPlacerTorpilleur, BoxLayout.Y_AXIS);
+		buttonPanel.add(btnAnnuler, BoxLayout.Y_AXIS);
+		buttonPanel.add(btnAide, BoxLayout.Y_AXIS);
+		buttonPanel.add(btnRecommencer, BoxLayout.Y_AXIS);*/
 		
 		
 		
-		JButton jb = new JButton("Ok");
-		jb.addActionListener(new Listener(this));
+		//JButton jb = new JButton("Ok");
+		//jb.addActionListener(new Listener(this));
 		
-		jb.addActionListener(new ActionListener() {
+		/*jb.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Second");
 			}
-		});
+		});*/
 		
-		this.getContentPane().add(new JButton("NOK"));
-		this.getContentPane().add(jb);
+		//this.getContentPane().add(new JButton("NOK"));
+		//this.getContentPane().add(jb);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
