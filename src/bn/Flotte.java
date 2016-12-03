@@ -1,5 +1,7 @@
 package bn;
 
+import java.util.LinkedList;
+
 import listeDouble.ListeDouble;
 
 public class Flotte {
@@ -33,9 +35,9 @@ public class Flotte {
 		this.grille = _grille;
 	}
 	
-	public void setPositionsOccuper(Position[] _positions){
-		for(int i = 0; i< _positions.length; i++){
-			grille[_positions[i].getColonne()][_positions[i].getRangee()].setEstOccuper(true);
+	public void setPositionsOccuper(LinkedList<Position> _positions){
+		for(int i = 0; i< _positions.size(); i++){
+			grille[_positions.get(i).getColonne()][_positions.get(i).getRangee()].setEstOccuper(true);
 		}
 		
 	}

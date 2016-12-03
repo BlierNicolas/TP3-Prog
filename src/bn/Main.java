@@ -27,24 +27,24 @@ public class Main {
 			});*/
 		
 		
-		/*
+		
 		JoueurArtificiel AI = new JoueurArtificiel();
 		Navire navire = new Navire("Navire 3",3);
-		//Navire navire2 = new Navire("Navire 5", 5);
+		Navire navire2 = new Navire("Navire 5", 5);
 		AI.placeNavire(navire);
-		//AI.placeNavire(navire2);
+		AI.placeNavire(navire2);
 		System.out.println(navire.toString());
-		//System.out.println(navire2.toString());
+		System.out.println(navire2.toString());
 		
-		System.out.println(navire.getPosition()[0].toString());
+		System.out.println(navire.getPosition().get(0).toString());
 		
-		for(int i = 0; i < navire.getPosition().length; i++){
-			AI.recoitTire(navire.getPosition()[i]);
+		for(int i = 0; i < navire.getPosition().size(); i++){
+			AI.recoitTire(navire.getPosition().get(i));
 		}
 		
 		System.out.println(navire.toString());
 		
-		*/
+		
 		
 	}
 	

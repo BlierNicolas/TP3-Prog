@@ -5,7 +5,7 @@ public class JoueurArtificiel extends AJoueur {
 	boolean searchState;
 	boolean isNormal;
 	boolean attackState;
-	private Position[] nextTire;//Ajouter File
+	private PileSimple nextTire;
 	JoueurArtificiel(){
 		super(); 
 		searchState = true;
@@ -22,12 +22,12 @@ public class JoueurArtificiel extends AJoueur {
 			//S'il a toucher un navire
 			if(cible.flotte.getGrille()[posTirer.getColonne()][posTirer.getRangee()].getEstOccuper()){
 				attackState = true;
-				setNextTire(posTirer);
+				setNextTire(posTirer, cible);
 			}
 		}
 		if(isNormal && !searchState){
-			if(nextTire[0] != null){
-				cible.recoitTire(nextTire[0]);
+			if(!nextTire.estVide()){
+				cible.recoitTire(nextTire.depile());
 			}else{
 				searchState = true;
 			}
@@ -37,7 +37,7 @@ public class JoueurArtificiel extends AJoueur {
 		//Ajout stat
 	}
 	
-	private void setIsNormal(boolean _value){
+	public void setIsNormal(boolean _value){
 		this.isNormal = _value;
 				
 	}
@@ -50,31 +50,62 @@ public class JoueurArtificiel extends AJoueur {
 		
 	}
 	
-	private void setNextTire(Position _position){
+	private void setNextTire(Position _position, IJoueur _cible){
 		//Ajouter NORD/SUD/EST/OUEST de _position dans le tableau NextTire
 		
-		Position Nord = new Position(_position.getColonne(), _position.getRangee() + 1);
-		Position Sud =  new Position(_position.getColonne(), _position.getRangee() - 1);
-		Position Ouest =  new Position(_position.getColonne() - 1, _position.getRangee());
-		Position Est =  new Position(_position.getColonne() + 1, _position.getRangee());
+		
+		nextTire.empile(new Position(_position.getColonne() + 1 ,_position.getRangee()));
+		nextTire.empile(new Position(_position.getColonne() - 1 ,_position.getRangee()));
+		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() + 1));
+		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() - 1));
+		/*
+		if(_position.getRangee() + 1 <= MAX_RANGEE_COLONNE){
+			if(!_cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() + 1].getTouchee()){
+				nextTire[0] = _cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() + 1];
+			}	
+		}
+		
+		if(_position.getRangee() - 1 >= 0){
+			if(!_cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() - 1].getTouchee()){
+				nextTire[1] = _cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() - 1];
+			}	
+		}
+		if(_position.getColonne() - 1 >= 0){
+			if(!_cible.flotte.getGrille()[_position.getColonne()-1][_position.getRangee()].getTouchee()){
+				nextTire[2] = _cible.flotte.getGrille()[_position.getColonne()-1][_position.getRangee()];
+			}	
+		}
+
+		if(_position.getColonne() + 1 <= MAX_RANGEE_COLONNE){
+			if(!_cible.flotte.getGrille()[_position.getColonne() + 1][_position.getRangee()].getTouchee()){
+				nextTire[3] = _cible.flotte.getGrille()[_position.getColonne()+1][_position.getRangee()];
+			}	
+		}*/
+
 		
 		/*
 		 * Ajouter les positions dans NextTire
 		 */
 		
-		validationNextTire();
+		validationNextTire(_cible);
 	}
 	
-	private void validationNextTire(){
-		for(int i = 0; i< nextTire.length; i++){
-			if(nextTire[i].getColonne() > 0 && nextTire[i].getColonne() < MAX_RANGEE_COLONNE && 
-					nextTire[i].getRangee() > 0 && nextTire[i].getRangee() < MAX_RANGEE_COLONNE){
-					//Position est bonne
-					//Position doit pas etre tirer
+	private void validationNextTire(IJoueur _cible){
+		for(int i = 0; i< nextTire.getCompteur(); i++){
+			Position refTemp = nextTire.getNext();
+			if(refTemp.getColonne() >= 0 && refTemp.getColonne() <= MAX_RANGEE_COLONNE && 
+					refTemp.getRangee() >= 0 && refTemp.getRangee() <= MAX_RANGEE_COLONNE){
+				//Position est dans la grille
+					
+				//Si la position est toucher un set la position a null
+				if(_cible.flotte.getGrille()[refTemp.getColonne()][refTemp.getRangee()].getTouchee()){
+					//Remove Position from the list
+					nextTire.depile();
+				}
 				
 			}else{
 				//Remove Position from the list
-				nextTire[i] = null;
+				nextTire.depile();
 			}
 			
 		}

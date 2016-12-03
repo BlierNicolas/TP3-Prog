@@ -15,27 +15,32 @@ public class Position
 		setRangee(_rangee);
 		setTouche(false);
 	}
+	public Position(Position _position){
+		setColonne(_position.getColonne());
+		setRangee(_position.getRangee());
+		setTouche(_position.getTouchee());
+	}
 	
 	public int getColonne(){
 		return this.colonne;
 	}
 	public void setColonne(int _colonne){
-		if(validation(_colonne)){
+		//if(validation(_colonne)){
 			this.colonne = _colonne;
-		}else{
-			System.out.println("La position(Colonne) n'est pas valide");
-		}
+		//}else{
+		//	System.out.println("La position(Colonne) n'est pas valide");
+		//}
 	}
 	public int getRangee(){
 		return this.rangee;
 	}
 	
 	public void setRangee(int _value){
-		if(validation(_value)){
+		//if(validation(_value)){
 			this.rangee = _value;
-		}else{
-			System.out.println("La position(Rangee) n'est pas valide");
-		}
+		//}else{
+			//System.out.println("La position(Rangee) n'est pas valide");
+		//}
 	}
 	
 	public boolean getTouchee(){

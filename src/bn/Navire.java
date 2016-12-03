@@ -1,28 +1,30 @@
 package bn;
 
+import java.util.LinkedList;
+
 public class Navire {
 	private String nom;
-	private Position[] positions;
+	private LinkedList<Position> positions;
 	private int longueur;
 
 
 	
 	public Navire(String _nom,int _longueur) {
 		this.nom = _nom;
-		this.positions = null;
+		this.positions = new LinkedList<Position>();
 		this.longueur = _longueur;
 	}
 	
 	public boolean estCoule(){
-		Position[] position = getPosition();
+		LinkedList<Position> position = getPosition();
 		int compteur = 0;
-		for(int i = 0; i< position.length; i++){
-			if(position[i].getTouchee()){
+		for(int i = 0; i< position.size(); i++){
+			if(position.get(i).getTouchee()){
 				compteur ++;
 			}	
 		}
 		
-		if(compteur == position.length){
+		if(compteur == position.size()){
 			return true;
 		}
 		return false;
@@ -34,11 +36,11 @@ public class Navire {
 		this.nom = _nom;
 	}
 	
-	public Position[] getPosition() {
+	public LinkedList<Position> getPosition() {
 		return this.positions;
 	}
 	
-	public void setPosition(Position[] _positions){
+	public void setPosition(LinkedList<Position> _positions){
 		this.positions = _positions;
 	}
 	
@@ -51,9 +53,9 @@ public class Navire {
 		
 	public String toString() {
 		String strRetour = "Navire: Position: ";
-		for(int i=0; i<getPosition().length; i++){
-			strRetour += "{" + getPosition()[i].getColonne() + ";" + getPosition()[i].getRangee() + "} ";
+		for(int i=0; i<getPosition().size(); i++){
+			strRetour += "{" + getPosition().get(i).getColonne() + ";" + getPosition().get(i).getRangee() + "} ";
 		}
-		return strRetour + this.nom + " est long de " + getPosition().length + " cases et le bateau est Coulee: " + estCoule();
+		return strRetour + this.nom + " est long de " + getLongueur() + " cases et le bateau est Coulee: " + estCoule();
 	}
 }

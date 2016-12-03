@@ -1,5 +1,6 @@
 package bn;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public abstract class AJoueur implements IJoueur {
@@ -10,7 +11,7 @@ public abstract class AJoueur implements IJoueur {
 	 * @param navire Navire que l'on desire placer
 	 */
 	public void placeNavire(Navire navire){
-		Position[] positionsValide = getRandPositionsNavire(navire.getLongueur());
+		LinkedList<Position> positionsValide = getRandPositionsNavire(navire.getLongueur());
 
 		navire.setPosition(positionsValide);//Enregistre les positions du navire
 		//Besoin de testing... Est ce neccessaire ou le referencement fait deja ca? 
@@ -41,7 +42,7 @@ public abstract class AJoueur implements IJoueur {
 	  * @param _longueur La longueur de navire que l'on souhaite placer
 	  * @return un tableau de position pouvant acceuillir un navire de _longueur
 	  */
-	private Position[] getRandPositionsNavire(int _longueur){
+	private LinkedList<Position> getRandPositionsNavire(int _longueur){
 		
 		/***
 		 * *******************STRATEGIE******************
@@ -62,7 +63,7 @@ public abstract class AJoueur implements IJoueur {
 			int randOrientation = new Random().nextInt(2);
 			
 			//Tableau contenant les positions possible du navire
-			Position[] positionRetour = new Position[_longueur];//Mauvais!! On doit mettre une liste dynamique ici 
+			LinkedList<Position> positionRetour = new LinkedList<Position>();//Mauvais!! On doit mettre une liste dynamique ici 
 
 			//Si la position n'est pas deja occuper
 			if(!flotte.getGrille()[randX][randY].getEstOccuper())
@@ -77,12 +78,12 @@ public abstract class AJoueur implements IJoueur {
 						for(int i = 0; i<_longueur; i++){
 							if(!flotte.getGrille()[randX][randY - i].getEstOccuper()){
 								
-								positionRetour[i] = flotte.getGrille()[randX][randY - i];
+								positionRetour.add(flotte.getGrille()[randX][randY - i]);
 							}
 						}
 					}
 					//Si toute les cases tester peuvents acceuillir le navire
-					if(positionRetour.length == _longueur){//Mauvais as fuck
+					if(positionRetour.size() == _longueur){//Mauvais as fuck
 						//Met tout les cases du tableau a occupee 
 						return setEstOccuper(positionRetour);
 					}
@@ -93,12 +94,12 @@ public abstract class AJoueur implements IJoueur {
 						for(int i = 0; i<_longueur; i++){
 							if(!flotte.getGrille()[randX + i][randY].getEstOccuper()){
 								
-								positionRetour[i] = flotte.getGrille()[randX + i][randY];
+								positionRetour.add(flotte.getGrille()[randX + i][randY]);
 							}
 						}
 					}
 					//Si toute les cases tester peuvents acceuillir le navire
-					if(positionRetour.length == _longueur){//Mauvais as fuck
+					if(positionRetour.size() == _longueur){//Mauvais as fuck
 						//Met tout les cases du tableau a occupee 
 						return setEstOccuper(positionRetour);
 					}
@@ -115,9 +116,9 @@ public abstract class AJoueur implements IJoueur {
 	 * @param _position Tableau de position d'un navire
 	 * @return Le tableau avec les positions modifiees
 	 */
-	private Position[] setEstOccuper(Position[] _position){
-		for(int i = 0; i<_position.length; i++){
-			_position[i].setEstOccuper(true);
+	private LinkedList<Position> setEstOccuper(LinkedList<Position> _position){
+		for(int i = 0; i<_position.size(); i++){
+			_position.get(i).setEstOccuper(true);
 		}
 		
 		return _position;
