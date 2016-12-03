@@ -11,7 +11,7 @@ public class JoueurHumain extends AJoueur {
 	@Override
 	public void recoitTire(Position position) {
 		// TODO Auto-generated method stub
-		
+		this.flotte.getGrille()[position.getColonne()][position.getRangee()].setTouche(true);
 	}
 
 }

@@ -83,7 +83,7 @@ public abstract class AJoueur implements IJoueur {
 						}
 					}
 					//Si toute les cases tester peuvents acceuillir le navire
-					if(positionRetour.size() == _longueur){//Mauvais as fuck
+					if(positionRetour.size() == _longueur){
 						//Met tout les cases du tableau a occupee 
 						return setEstOccuper(positionRetour);
 					}
@@ -99,7 +99,7 @@ public abstract class AJoueur implements IJoueur {
 						}
 					}
 					//Si toute les cases tester peuvents acceuillir le navire
-					if(positionRetour.size() == _longueur){//Mauvais as fuck
+					if(positionRetour.size() == _longueur){
 						//Met tout les cases du tableau a occupee 
 						return setEstOccuper(positionRetour);
 					}
