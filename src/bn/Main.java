@@ -1,18 +1,8 @@
 package bn;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.GridLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import java.awt.*;
 
 public class Main {
 	
@@ -76,7 +66,7 @@ public class Main {
 		buttonPanel.add(addButton("Recommencer", buttonPanel));
 		
 		JPanel grillePanel = new JPanel();
-		grillePanel.setLayout(new GridLayout(0,1));
+		grillePanel.setLayout(new BoxLayout(grillePanel, BoxLayout.Y_AXIS));
 		framePrincipal.add(grillePanel, BorderLayout.CENTER);
 		String cases[][] = {{"1", "", "", "", "", "", "", "", "", "", ""},
 							{"2", "", "", "", "", "", "", "", "", "", ""},
@@ -89,16 +79,45 @@ public class Main {
 							{"9", "", "", "", "", "", "", "", "", "", ""},
 							{"10", "", "", "", "", "", "", "", "", "", ""}};
 		String entetes[] = {"", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-		
-		JTable grilleAI = new JTable(cases, entetes);
-		JTable grilleJ = new JTable(cases, entetes);
-		grillePanel.add(grilleAI);
-		grillePanel.add(grilleJ);
+
+        JTable grilleAI = new JTable(cases, entetes);
+        JTable grilleJ = new JTable(cases, entetes);
+		JScrollPane scrollPaneAI = new JScrollPane(grilleAI);
+		JScrollPane scrollPaneJ = new JScrollPane(grilleJ);
+		grillePanel.add(new JLabel("Grille adverse"));
+		grillePanel.add(scrollPaneAI);
+		grillePanel.add(new JLabel("Votre grille"));
+		grillePanel.add(scrollPaneJ);
 		
 		JPanel tirsPanel = new JPanel();
 		framePrincipal.add(tirsPanel, BorderLayout.LINE_END);
-		
-		
+		tirsPanel.setLayout(new BoxLayout(tirsPanel, BoxLayout.Y_AXIS));
+		JLabel dernierTirsAI = new JLabel("Derniers tirs AI");
+		JLabel tirsAI1 = new JLabel("1");
+		JLabel tirsAI2 = new JLabel("2");
+		JLabel tirsAI3 = new JLabel("3");
+		JLabel tirsAI4 = new JLabel("4");
+		JLabel tirsAI5 = new JLabel("5");
+		tirsPanel.add(dernierTirsAI);
+		tirsPanel.add(tirsAI1);
+		tirsPanel.add(tirsAI2);
+		tirsPanel.add(tirsAI3);
+		tirsPanel.add(tirsAI4);
+		tirsPanel.add(tirsAI5);
+
+		JLabel dernierTirsJ = new JLabel("Vos derniers tirs");
+		JLabel tirsJ1 = new JLabel("1");
+		JLabel tirsJ2 = new JLabel("2");
+		JLabel tirsJ3 = new JLabel("3");
+		JLabel tirsJ4 = new JLabel("4");
+		JLabel tirsJ5 = new JLabel("5");
+        tirsPanel.add(dernierTirsJ);
+        tirsPanel.add(tirsJ1);
+        tirsPanel.add(tirsJ2);
+        tirsPanel.add(tirsJ3);
+        tirsPanel.add(tirsJ4);
+        tirsPanel.add(tirsJ5);
+
 		JPanel logPanel = new JPanel();
 		JTextField tbLog = new JTextField();
 		framePrincipal.add(tbLog, BorderLayout.PAGE_END);

@@ -1,5 +1,7 @@
 package bn;
 
+
+
 public class JoueurArtificiel extends AJoueur {
 	
 	boolean searchState;
