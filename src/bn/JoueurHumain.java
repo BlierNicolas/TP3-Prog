@@ -5,12 +5,11 @@ public class JoueurHumain extends AJoueur {
 	@Override
 	public void tire(IJoueur cible) {
 		// TODO Auto-generated method stub
-		
-		
-		//Pour aide 
-		//Appel this.setNextTire(_position, _cible);
-		//Il suffira juste a envoyer la position du dernier dire du joueur 
-		//et de faire this.getNextTire().depile();
+
+		//Je n'ai pas réussi à obtenir les données pour les dispositions de la cases de la grille
+		Position position = new Position(grilleAI.getColumns(), grilleAI.getRows(), false, false);
+		this.setNextTire(position, cible);
+		this.getNextTire().depile();
 		
 	}
 	@Override

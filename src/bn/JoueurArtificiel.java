@@ -3,10 +3,13 @@ package bn;
 
 
 public class JoueurArtificiel extends AJoueur {
-	
-	boolean searchState;//Determine si l'AI est en recherche d'une cible
-	boolean isNormal;//Determine si L'AI est Normal(true) ou Facile(false)
-	//private PileSimple nextTire;// Pile contenant les prochains tirent de l'AI  
+
+	//Determine si l'AI est en recherche d'une cible
+	boolean searchState;
+
+	//Determine si L'AI est Normal(true) ou Facile(false)
+	boolean isNormal;
+
 	/**
 	 * Constructeur
 	 * @param _estNormal definis si le AI est de difficulte normal
