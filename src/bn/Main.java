@@ -18,7 +18,6 @@ public class Main {
 			}
 			
 		});
-<<<<<<< HEAD
 		
 		
 			/*SwingUtilities.invokeLater(new Runnable() {
@@ -34,11 +33,7 @@ public class Main {
 		JoueurArtificiel AI = new JoueurArtificiel(true);
 		JoueurHumain JH = new JoueurHumain();
 		
-		
-=======
 
-		JoueurArtificiel AI = new JoueurArtificiel();
->>>>>>> origin/master
 		Navire navire = new Navire("Navire 3",3);
 		Navire navire2 = new Navire("Navire 5", 5);
 		Navire navire3 = new Navire("Navire 4",4);
@@ -52,16 +47,16 @@ public class Main {
 		JH.placeNavire(navire5);
 		
 		
-<<<<<<< HEAD
+
 		
 		for(int i = 0; i< 40; i++){
 			AI.tire(JH);
 		}
 		
 		
-=======
+
 		System.out.println(navire.toString());
->>>>>>> origin/master
+
 	}
 	
 	public static void demarre() {

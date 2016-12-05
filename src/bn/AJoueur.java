@@ -22,8 +22,8 @@ public abstract class AJoueur implements IJoueur {
 	}
 
 	/**
-	  * 
-	  * @return
+	  * Cherche une position aleatoire non touchee
+	  * @return Position aleatoire non touchee
 	  */
 	 public Position getRandPositionGrille(){
 		do{
@@ -34,8 +34,7 @@ public abstract class AJoueur implements IJoueur {
 				if(!this.flotte.getGrille()[randX][randY].getEstTouchee()){
 					return new Position(randX,randY);
 				}
-		}while(true);
-		
+		}while(true);	
 	}
 
 	 /**
@@ -125,19 +124,22 @@ public abstract class AJoueur implements IJoueur {
 		return _position;
 	}
 	
+	/**
+	 * Prend les positions Nord/Sud/Est/Ouest de _position et les ajoutes dans
+	 * la pile nextTire
+	 * @param _position Position du dernier tire
+	 * @param _cible Adversaire
+	 */
 	public void setNextTire(Position _position, IJoueur _cible){
 		//Ajouter NORD/SUD/EST/OUEST de _position dans le tableau NextTire
 		nextTire = new PileSimple(new Position(_position.getColonne() + 1 ,_position.getRangee())); 
 		
-		//nextTire.empile(new Position(_position.getColonne() + 1 ,_position.getRangee()));
 		nextTire.empile(new Position(_position.getColonne() - 1 ,_position.getRangee()));
 		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() + 1));
 		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() - 1));
 		
-		/*
-		 * Ajouter les positions dans NextTire
-		 */
 		
+		//Valide les positions dans NextTire
 		validationNextTire(_cible);
 	}
 	
@@ -145,6 +147,11 @@ public abstract class AJoueur implements IJoueur {
 		return this.nextTire;
 	}
 	
+	/**
+	 * Valide si les positions dans nextPile sont non touchee et 
+	 * dans la grille  
+	 * @param _cible Adversaire
+	 */
 	private void validationNextTire(IJoueur _cible){
 		PileSimple tmpPile = new PileSimple(nextTire);
 		
@@ -157,12 +164,10 @@ public abstract class AJoueur implements IJoueur {
 					
 				//Si la position est pas toucher on l'empile
 				if(!_cible.flotte.getGrille()[refTemp.getColonne()][refTemp.getRangee()].getEstTouchee()){
-					//Remove Position from the list
+					//Position valide. On l'empile
 					nextTire.empile(refTemp);
-				}
-				
+				}	
 			}	
 		}
 	}
-
 }

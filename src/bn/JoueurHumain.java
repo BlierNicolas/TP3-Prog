@@ -13,6 +13,10 @@ public class JoueurHumain extends AJoueur {
 		//et de faire this.getNextTire().depile();
 		
 	}
+	@Override
+	public void placeNavire(Navire _navire){
+		//Pour placer le navire du joueur humain
+	}
 
 	@Override
 	public void recoitTire(Position position) {
