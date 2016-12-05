@@ -28,22 +28,27 @@ public class Main {
 		
 		
 		
-		JoueurArtificiel AI = new JoueurArtificiel();
+		JoueurArtificiel AI = new JoueurArtificiel(true);
+		JoueurHumain JH = new JoueurHumain();
+		
+		
 		Navire navire = new Navire("Navire 3",3);
 		Navire navire2 = new Navire("Navire 5", 5);
-		AI.placeNavire(navire);
-		AI.placeNavire(navire2);
-		System.out.println(navire.toString());
-		System.out.println(navire2.toString());
+		Navire navire3 = new Navire("Navire 4",4);
+		Navire navire4 = new Navire("Navire 3-2", 3);
+		Navire navire5 = new Navire("Navire 2", 2);
 		
-		System.out.println(navire.getPosition().get(0).toString());
+		JH.placeNavire(navire);
+		JH.placeNavire(navire2);
+		JH.placeNavire(navire3);
+		JH.placeNavire(navire4);
+		JH.placeNavire(navire5);
 		
-		for(int i = 0; i < navire.getPosition().size(); i++){
-			AI.recoitTire(navire.getPosition().get(i));
+		
+		
+		for(int i = 0; i< 40; i++){
+			AI.tire(JH);
 		}
-		
-		System.out.println(navire.toString());
-		
 		
 		
 	}
@@ -78,6 +83,7 @@ public class Main {
 							{"8", "", "", "", "", "", "", "", "", "", ""},
 							{"9", "", "", "", "", "", "", "", "", "", ""},
 							{"10", "", "", "", "", "", "", "", "", "", ""}};
+		
 		String entetes[] = {"", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
         JTable grilleAI = new JTable(cases, entetes);

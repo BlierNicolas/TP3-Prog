@@ -4,114 +4,85 @@ package bn;
 
 public class JoueurArtificiel extends AJoueur {
 	
-	boolean searchState;
-	boolean isNormal;
-	boolean attackState;
-	private PileSimple nextTire;
-	JoueurArtificiel(){
+	boolean searchState;//Determine si l'AI est en recherche d'une cible
+	boolean isNormal;//Determine si L'AI est Normal(true) ou Facile(false)
+	//private PileSimple nextTire;// Pile contenant les prochains tirent de l'AI  
+	/**
+	 * Constructeur
+	 * @param _estNormal definis si le AI est de difficulte normal
+	 */
+	JoueurArtificiel(boolean _estNormal){
 		super(); 
 		searchState = true;
-		attackState = false;
-		isNormal = false;
+		//attackState = false;
+		isNormal = _estNormal;
 	}
 
 	@Override
-	public void tire(IJoueur cible) {
-		if(searchState && !attackState){
-			Position posTirer = cible.getRandPositionGrille();	
-			cible.recoitTire(posTirer);
-			
-			//S'il a toucher un navire
-			if(cible.flotte.getGrille()[posTirer.getColonne()][posTirer.getRangee()].getEstOccuper()){
-				attackState = true;
-				setNextTire(posTirer, cible);
-			}
-		}
+	/**
+	 * Methode qui effectue un tire sur la cible selon le niveau de difficulte de l'AI
+	 */
+	public void tire(IJoueur _cible) {
+	
+		System.out.println("AI Tire: Recherche:" + searchState );
+		
+		/**Strategie 
+		 * AI est Normal ou n'est pas en recherche
+		 * Tire sur la cible avec les positions contenue dans nextTire()
+		 * Si le tir frappe un navire on set les prochains tirs
+		 * si la pile est vide on reactive le mode recherche
+		 */
 		if(isNormal && !searchState){
-			if(!nextTire.estVide()){
-				cible.recoitTire(nextTire.depile());
+			if(!getNextTire().estVide()){
+				Position posTirePile = getNextTire().depile();
+				_cible.recoitTire(posTirePile);
+				
+				if(posTirePile.getEstOccuper()){
+					//AI a touche un navire alors on set les prochains tires
+					setNextTire(posTirePile,_cible);
+				}
+				
 			}else{
+				//Si il ni a plus de prochain tirs. On active le mode recherche
 				searchState = true;
 			}
 			
-		}
-		
+		}else{
+			/* Strategie 
+			 * AI facile OU en mode recherche 
+			 * Alors tir aleatoire seulement 
+			 * Si le tir touche un navire On genere une pile contenant les prochains tirs
+			 * et on desactive le mode recherche 
+			 */
+			
+			//Tire de facons aleatoire sur la grille adverse
+			Position posTirer = _cible.getRandPositionGrille();	
+			_cible.recoitTire(posTirer);
+			
+			//S'il a toucher un navire
+			if(_cible.flotte.getGrille()[posTirer.getColonne()][posTirer.getRangee()].getEstOccuper()){
+				//Desactive le monde recherche
+				searchState = false; 
+				setNextTire(posTirer, _cible);
+			}
+		}		
 		//Ajout stat
 	}
-	
+	/**
+	 * Change le niveau de difficulte de l'AI
+	 * @param _value True si Normal, False si facile
+	 */
 	public void setIsNormal(boolean _value){
 		this.isNormal = _value;
 				
 	}
 
 	@Override
-	public void recoitTire(Position position) {
-		// TODO Auto-generated method stub
+	/**
+	 * Set la _position transmise en parametre a touchee(true)
+	 */
+	public void recoitTire(Position _position) {
 		
-		position.setTouche(true);
-		
+		_position.setEstTouche(true);	
 	}
-	
-	private void setNextTire(Position _position, IJoueur _cible){
-		//Ajouter NORD/SUD/EST/OUEST de _position dans le tableau NextTire
-		
-		
-		nextTire.empile(new Position(_position.getColonne() + 1 ,_position.getRangee()));
-		nextTire.empile(new Position(_position.getColonne() - 1 ,_position.getRangee()));
-		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() + 1));
-		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() - 1));
-		/*
-		if(_position.getRangee() + 1 <= MAX_RANGEE_COLONNE){
-			if(!_cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() + 1].getTouchee()){
-				nextTire[0] = _cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() + 1];
-			}	
-		}
-		
-		if(_position.getRangee() - 1 >= 0){
-			if(!_cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() - 1].getTouchee()){
-				nextTire[1] = _cible.flotte.getGrille()[_position.getColonne()][_position.getRangee() - 1];
-			}	
-		}
-		if(_position.getColonne() - 1 >= 0){
-			if(!_cible.flotte.getGrille()[_position.getColonne()-1][_position.getRangee()].getTouchee()){
-				nextTire[2] = _cible.flotte.getGrille()[_position.getColonne()-1][_position.getRangee()];
-			}	
-		}
-
-		if(_position.getColonne() + 1 <= MAX_RANGEE_COLONNE){
-			if(!_cible.flotte.getGrille()[_position.getColonne() + 1][_position.getRangee()].getTouchee()){
-				nextTire[3] = _cible.flotte.getGrille()[_position.getColonne()+1][_position.getRangee()];
-			}	
-		}*/
-
-		
-		/*
-		 * Ajouter les positions dans NextTire
-		 */
-		
-		validationNextTire(_cible);
-	}
-	
-	private void validationNextTire(IJoueur _cible){
-		for(int i = 0; i< nextTire.getCompteur(); i++){
-			Position refTemp = nextTire.getNext();
-			if(refTemp.getColonne() >= 0 && refTemp.getColonne() <= MAX_RANGEE_COLONNE && 
-					refTemp.getRangee() >= 0 && refTemp.getRangee() <= MAX_RANGEE_COLONNE){
-				//Position est dans la grille
-					
-				//Si la position est toucher un set la position a null
-				if(_cible.flotte.getGrille()[refTemp.getColonne()][refTemp.getRangee()].getTouchee()){
-					//Remove Position from the list
-					nextTire.depile();
-				}
-				
-			}else{
-				//Remove Position from the list
-				nextTire.depile();
-			}
-			
-		}
-	}
-	
-
 }

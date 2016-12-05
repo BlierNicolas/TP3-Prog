@@ -8,16 +8,20 @@ public class PileSimple
 	    /**
 	     * Constructeur
 	     *
-	     * @param maillon
+	     * @param La tete de l'instance de la pile
 	     */
 	    public PileSimple(Position _position) {
 	        this.tete = new Maillon(_position);
-	        compteur = 0;
+	        compteur = 1;
+	    }
+	    public PileSimple(PileSimple _pile){
+	    	this.setTete(_pile.tete);
+	    	this.setCompteur(_pile.getCompteur());
 	    }
 
 	    /**
 	     *
-	     * @return
+	     * @return Si la pile est vide
 	     */
 	    public boolean estVide() {
 	        return this.tete == null;
@@ -28,21 +32,25 @@ public class PileSimple
 	     * @param value
 	     */
 	    public void empile(Position value) {
-	        Maillon maillon = new Maillon(value);
-	        maillon.setNext(tete);
-	        tete = maillon;
-	        compteur++;
+	    	Maillon maillon = new Maillon(value);
+	    	maillon.setNext(tete);
+	    	tete = maillon;
+	    	compteur++;
+	    	
 	    }
 
 	    /**
-	     *
-	     * @return
+	     *Depile la tete de la pile
+	     * @return La tete de la pile
 	     */
 	    public Position depile() {
-	        Maillon maillonDeRetour = this.tete;
-	        this.tete = this.tete.getNext();
-	        compteur--;
-	        return maillonDeRetour.getValeur();
+	    	if(!estVide()){	
+	    		Maillon maillonDeRetour = this.tete;
+	    		this.tete = this.tete.getNext();
+	    		compteur--;
+	    		return maillonDeRetour.getValeur();
+	    	}
+	    	return null;
 	    }
 	    
 	    public Position getNext(){
@@ -51,6 +59,25 @@ public class PileSimple
 	    
 	    public int getCompteur(){
 	    	return this.compteur;
+	    }
+	    public void setCompteur(int _value){
+	    	this.compteur = _value;
+	    }
+	    public Maillon getTete(){
+	    	return this.tete;
+	    }
+	    public void setTete(Maillon _tete){
+	    	this.tete = _tete;
+	    }
+	    /**
+	     * Vide la pile completement
+	     */
+	    public void clear(){
+	    	for(int i = 0; i< this.getCompteur(); i++){
+	    		this.depile();
+	    	}
+	    	this.setCompteur(0);
+	    	this.setTete(null);//Plante si on le set Pas manuellement??? 
 	    }
 
 }

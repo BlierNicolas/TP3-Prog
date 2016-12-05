@@ -11,12 +11,14 @@ public class Flotte {
 	
 	
 	public Flotte() {
-		//this.navires = 0; 
 		initGrille();
 		navires = new Navire[4];
 		
 	}
 	
+	/**
+	 * Initialise la grille de jeu avec des positions par defauts
+	 */
 	private void initGrille(){
 		grille = new Position[9][9];
 		for(int i = 0; i<9; i++){
@@ -35,6 +37,10 @@ public class Flotte {
 		this.grille = _grille;
 	}
 	
+	/**
+	 * Set a Occuper les positions transmisent en parametre
+	 * @param _positions Tableau de position que l'on souhaite rendre occuper
+	 */
 	public void setPositionsOccuper(LinkedList<Position> _positions){
 		for(int i = 0; i< _positions.size(); i++){
 			grille[_positions.get(i).getColonne()][_positions.get(i).getRangee()].setEstOccuper(true);

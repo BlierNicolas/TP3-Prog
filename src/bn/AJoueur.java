@@ -5,6 +5,7 @@ import java.util.Random;
 
 public abstract class AJoueur implements IJoueur {
 	final int MAX_RANGEE_COLONNE = 9;
+	private PileSimple nextTire;// Pile contenant les prochains tirent de l'AI 
 
 	/**
 	 * Place un navire sur la grille
@@ -30,7 +31,7 @@ public abstract class AJoueur implements IJoueur {
 			int randY = new Random().nextInt(MAX_RANGEE_COLONNE);
 			
 			//Trouve une position aleatoire non touchee
-				if(!this.flotte.getGrille()[randX][randY].getTouchee()){
+				if(!this.flotte.getGrille()[randX][randY].getEstTouchee()){
 					return new Position(randX,randY);
 				}
 		}while(true);
@@ -73,7 +74,7 @@ public abstract class AJoueur implements IJoueur {
 				
 				case 0: //Orientation bas
 					//Si la position max est contenu dans la grille
-					if(randY - _longueur <= MAX_RANGEE_COLONNE && (randY - _longueur) >= 0 ){
+					if(randY - _longueur < MAX_RANGEE_COLONNE && (randY - _longueur) >= 0 ){
 						//Parcours tout les cases adjacentes et ajoute la position au tableau si elle est libre
 						for(int i = 0; i<_longueur; i++){
 							if(!flotte.getGrille()[randX][randY - i].getEstOccuper()){
@@ -122,6 +123,46 @@ public abstract class AJoueur implements IJoueur {
 		}
 		
 		return _position;
+	}
+	
+	public void setNextTire(Position _position, IJoueur _cible){
+		//Ajouter NORD/SUD/EST/OUEST de _position dans le tableau NextTire
+		nextTire = new PileSimple(new Position(_position.getColonne() + 1 ,_position.getRangee())); 
+		
+		//nextTire.empile(new Position(_position.getColonne() + 1 ,_position.getRangee()));
+		nextTire.empile(new Position(_position.getColonne() - 1 ,_position.getRangee()));
+		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() + 1));
+		nextTire.empile(new Position(_position.getColonne() ,_position.getRangee() - 1));
+		
+		/*
+		 * Ajouter les positions dans NextTire
+		 */
+		
+		validationNextTire(_cible);
+	}
+	
+	public PileSimple getNextTire(){
+		return this.nextTire;
+	}
+	
+	private void validationNextTire(IJoueur _cible){
+		PileSimple tmpPile = new PileSimple(nextTire);
+		
+		nextTire.clear();
+		while(!tmpPile.estVide()){
+			Position refTemp = tmpPile.depile();
+			if(refTemp.getColonne() >= 0 && refTemp.getColonne() < MAX_RANGEE_COLONNE && 
+					refTemp.getRangee() >= 0 && refTemp.getRangee() < MAX_RANGEE_COLONNE){
+				//Position est dans la grille
+					
+				//Si la position est pas toucher on l'empile
+				if(!_cible.flotte.getGrille()[refTemp.getColonne()][refTemp.getRangee()].getEstTouchee()){
+					//Remove Position from the list
+					nextTire.empile(refTemp);
+				}
+				
+			}	
+		}
 	}
 
 }

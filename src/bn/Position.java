@@ -2,78 +2,69 @@ package bn;
 
 public class Position 
 {
-	private int colonne;
-	private int rangee;
-	private boolean touche;
-	private boolean estOccuper;
+	private int colonne;//Coordonnee X 
+	private int rangee;//Coordonnee Y
+	private boolean estTouchee;
+	private boolean estOccupee;
 	
-	public final int MAX_COLONNE_RANGEE = 9;//Limite maximum pour les rangee et les colonnes
+	public final int MAX_COLONNE_RANGEE = 10;//Limite maximum pour les rangee et les colonnes
 	
+	//Constructeur
 	public Position(int _colonne, int _rangee)
 	{
 		setColonne(_colonne);
 		setRangee(_rangee);
-		setTouche(false);
+		setEstTouche(false);
 	}
+	//Constructeur
 	public Position(Position _position){
 		setColonne(_position.getColonne());
 		setRangee(_position.getRangee());
-		setTouche(_position.getTouchee());
+		setEstTouche(_position.getEstTouchee());
 	}
 	
 	public int getColonne(){
 		return this.colonne;
 	}
 	public void setColonne(int _colonne){
-		//if(validation(_colonne)){
 			this.colonne = _colonne;
-		//}else{
-		//	System.out.println("La position(Colonne) n'est pas valide");
-		//}
 	}
 	public int getRangee(){
 		return this.rangee;
 	}
 	
 	public void setRangee(int _value){
-		//if(validation(_value)){
-			this.rangee = _value;
-		//}else{
-			//System.out.println("La position(Rangee) n'est pas valide");
-		//}
+		this.rangee = _value;
 	}
 	
-	public boolean getTouchee(){
-		return this.touche;
+	public boolean getEstTouchee(){
+		return this.estTouchee;
 	}
-	public void setTouche(boolean _value){
-		this.touche = _value;
+	public void setEstTouche(boolean _value){
+		this.estTouchee = _value;
 	}
 	public boolean getEstOccuper(){
-		return this.estOccuper;
+		return this.estOccupee;
 	}
 	public void setEstOccuper(boolean _value){
-		this.estOccuper = _value;
+		this.estOccupee = _value;
 	}
+
 	/**
-	 * Valide si le parametre est une colonne ou rangee valide
-	 * @param _value Valeur que l'on souhaite valider
-	 * @return Vrai si la valeur est inferieur au MAX_COLONNE_RANGEE et superieur a 0
+	 * Retourne "+" si la position est occupee
+	 * Retourne "0" si la position est touchee
+	 * Retourne "X" si la position est occupee et touchee
 	 */
-	boolean validation(int _value){
-		if(_value <= MAX_COLONNE_RANGEE && _value >= 0){
-			return true; 
-		}
-		return false;
-	}
-	
 	@Override
 	public String toString(){
 		String strRetour = "";
 		if(getEstOccuper()){
 			strRetour = "+";
 		} 
-		if(getTouchee()){
+		if(getEstTouchee()){
+			strRetour = "0";
+		}
+		if(getEstOccuper() && getEstTouchee()){
 			strRetour = "X";
 		}
 		
